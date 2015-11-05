@@ -15,34 +15,9 @@ public class Main
 {
     public static void main(String[] args)
     {
-        FileReader puzzleFile = new FileReader("puzzle.txt");
-        FileReader wordsFile = new FileReader("words.txt");
 
-        final String delimiters = " ";
-
-        puzzleFile.forEachLine((String line, Integer lineNumber) ->
-        {
-            if(lineNumber == 1)
-            {
-                // Do something with the count.
-            }
-            else
-            {
-                StringTokenizer tokenizer =
-                    new StringTokenizer(line, delimiters);
-
-                while(tokenizer.hasMoreTokens())
-                {
-                    System.out.println(tokenizer.nextToken());
-                }
-            }
-        });
-
-        wordsFile.forEachLine((String line, Integer lineNumber) ->
-        {
-            System.out.println(line);
-        });
-
+        WordSearch wordSearch = new WordSearch("puzzle.txt", "words.txt");
+        wordSearch.run();
     }
 
     public static void exitWithError(String errorMessage)
