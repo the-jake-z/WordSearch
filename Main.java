@@ -9,6 +9,8 @@
  *      hidden inside of that file.
  */
 
+import java.util.StringTokenizer;
+
 public class Main
 {
     public static void main(String[] args)
@@ -16,14 +18,24 @@ public class Main
         FileReader puzzleFile = new FileReader("puzzle.txt");
         FileReader wordsFile = new FileReader("words.txt");
 
+        final String delimiters = " ";
+
         puzzleFile.forEachLine((String line, Integer lineNumber) ->
         {
             if(lineNumber == 1)
             {
                 // Do something with the count.
             }
+            else
+            {
+                StringTokenizer tokenizer =
+                    new StringTokenizer(line, delimiters);
 
-            System.out.println(line);
+                while(tokenizer.hasMoreTokens())
+                {
+                    System.out.println(tokenizer.nextToken());
+                }
+            }
         });
 
         wordsFile.forEachLine((String line, Integer lineNumber) ->
