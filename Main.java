@@ -13,7 +13,24 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Hello, world!");
+        FileReader puzzleFile = new FileReader("puzzle.txt");
+        FileReader wordsFile = new FileReader("words.txt");
+
+        puzzleFile.forEachLine((String line, Integer lineNumber) ->
+        {
+            if(lineNumber == 1)
+            {
+                // Do something with the count.
+            }
+
+            System.out.println(line);
+        });
+
+        wordsFile.forEachLine((String line, Integer lineNumber) ->
+        {
+            System.out.println(line);
+        });
+
     }
 
     public static void exitWithError(String errorMessage)
