@@ -4,21 +4,26 @@
  * 		Author:		Jacob A. Zarobsky
  * 		Date:		Nov 6, 2015
  *
- * 		This file runs the WordSearch and stores all
- *      necessary data for the search.
+ * 		This file stores all the data on a vertex.
  */
+
+import java.util.ArrayList;
 
  public class Vertex
  {
-     private String data;
+     // The letter of this vertex.
+     private String letter;
+     // The edges leaving out of this vertex.
      private ArrayList<Edge> edges;
 
-     public void setData(String d) { data = d; }
-     public String getData() { return data;}
+     // Property Accessors.
+     public void setLetter(String d) { letter = d; }
+     public String getLetter() { return letter; }
 
      public void setEdges(ArrayList<Edge> e) { edges = e; }
      public ArrayList<Edge> getEdges()
      {
+         // Lazy instantiation.
          if(edges == null)
          {
              edges = new ArrayList<Edge>();
@@ -27,13 +32,15 @@
          return edges;
      }
 
-     public Vertex(String data)
+     // Constructor
+     public Vertex(String letter)
      {
-        setData(data);
+        setLetter(letter);
      }
 
+     // Convenience method.
      public void addEdge(Vertex toVertex, Direction d)
      {
-         getEdges().add(new Vertex(toVertex, d));
+         getEdges().add(new Edge(toVertex, d));
      }
  }
