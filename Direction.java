@@ -4,18 +4,25 @@
  * 		Author:		Jacob A. Zarobsky
  * 		Date:		Nov 6, 2015
  *
- * 		This file runs the WordSearch and stores all
- *      necessary data for the search.
+ * 		This file stores readable direction values.
  */
 
  public enum Direction
  {
+    // Up
     NORTH,
+    // Up, Right
     NORTH_EAST,
+    // Right
     EAST,
+    // Down, Right
     SOUTH_EAST,
+    // Down
     SOUTH,
+    // Down, Left
     SOUTH_WEST,
+    // Left
     WEST,
+    // Up, Left
     NORTH_WEST
  }
