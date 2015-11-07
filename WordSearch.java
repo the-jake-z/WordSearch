@@ -10,17 +10,29 @@
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.Collections;
 
 public class WordSearch
 {
     private String puzzleSource;
     private String wordSource;
 
+    private ArrayList<String> dictionary;
+
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
     public String getPuzzleSource() { return puzzleSource;}
 
     public void setWordSource(String wSource) { wordSource = wSource; }
     public String getWordSource() { return wordSource; }
+
+    public void setDictionary(ArrayList<String> dict) { dictionary = dict; }
+    public ArrayList<String> getDictionary() {
+        if(dictionary == null)
+        {
+            dictionary = new ArrayList<String>();
+        }
+        return dictionary;
+    }
 
     public WordSearch(String puzzleSource, String wordSource)
     {
@@ -59,7 +71,10 @@ public class WordSearch
 
         fileReader.forEachLine((String line, Integer lineNumber) ->
         {
-            System.out.println(line);
+            getDictionary().add(line);
         });
+
+        // Sort the dictionary so it's ready for use.
+        Collections.sort(dictionary);
     }
 }
