@@ -14,11 +14,13 @@ import java.util.Collections;
 
 public class WordSearch
 {
+    // Private Properties
     private String puzzleSource;
     private String wordSource;
     private Graph graph;
     private ArrayList<String> dictionary;
 
+    // Accessors
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
     public String getPuzzleSource() { return puzzleSource;}
 
@@ -30,73 +32,67 @@ public class WordSearch
 
     public void setDictionary(ArrayList<String> dict) { dictionary = dict; }
     public ArrayList<String> getDictionary() {
+        // Lazy instantiation
         if(dictionary == null)
-        {
             dictionary = new ArrayList<String>();
-        }
+
         return dictionary;
     }
 
+    // Constructor
     public WordSearch(String puzzleSource, String wordSource)
     {
         setPuzzleSource(puzzleSource);
         setWordSource(wordSource);
     }
 
+    // Where the action happens.
     public void run()
     {
         initalizeSources();
+        PuzzleSolver solver = new PuzzleSolver(getGraph(), getDictionary());
+        solver.solve();
     }
 
+    // Load up our graph and our dictionary.
     private void initalizeSources()
     {
         final FileReader fileReader = new FileReader(getPuzzleSource());
         final String delimiters = " ";
         fileReader.forEachLine((String line, Integer lineNumber) ->
         {
+            // The first line of this file contains the size of the puzzle
+            // we need to solve. Treat it differntly than all the rest.
             if(lineNumber == 1)
             {
+                // Get the size of the puzzle.
                 int size = new Integer(line);
+                // Initalize a new square graph.
                 setGraph(new Graph(size, size));
             }
             else
             {
-                StringTokenizer tokenizer =
-                    new StringTokenizer(line, delimiters);
+                // Split the string based on spaces.
+                String[] letters = line.split(" ");
 
-                int count = 0;
-                while(tokenizer.hasMoreTokens())
-                {
-                    graph.addVertex(lineNumber - 2, count,
-                        tokenizer.nextToken());
-                    count++;
-                }
+                // Add a vertex for every letter in the line.
+                for(int i = 0; i < letters.length; i++)
+                    graph.addVertex(lineNumber - 2, i, letters[i]);
             }
         });
 
-        // Add in all the edges that we didn't do.
+        // Add in all the edges that we didn't do as we parsed in.
         graph.populateEdges();
-
-        for(int i = 0; i < graph.getVerticies().length; i++)
-        {
-            for(int j = 0; j < graph.getVerticies()[i].length; j++)
-            {
-                Vertex v = graph.getVerticies()[i][j];
-                for(Edge e : v.getEdges())
-                {
-                    System.out.println(v.getLetter() + ": " + e.getToVertex().getLetter());
-                }
-            }
-        }
 
         fileReader.setFilePath(getWordSource());
 
+        // Read in the dictionary.
         fileReader.forEachLine((String line, Integer lineNumber) ->
         {
             getDictionary().add(line);
         });
 
         // Sort the dictionary so it's ready for use.
-        Collections.sort(dictionary);
+        Collections.sort(getDictionary());
     }
 }

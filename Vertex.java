@@ -15,7 +15,7 @@ import java.util.ArrayList;
      private String letter;
      // The edges leaving out of this vertex.
      private ArrayList<Edge> edges;
-     
+     private boolean seen;
      // Property Accessors.
      public void setLetter(String d) { letter = d; }
      public String getLetter() { return letter; }
@@ -25,12 +25,13 @@ import java.util.ArrayList;
      {
          // Lazy instantiation.
          if(edges == null)
-         {
              edges = new ArrayList<Edge>();
-         }
 
          return edges;
      }
+
+     public void setSeen(boolean s) { seen = s; }
+     public boolean getSeen() { return seen; }
 
      // Constructor
      public Vertex(String letter)

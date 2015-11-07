@@ -9,7 +9,39 @@
  *      hidden inside of that file.
  */
 
+ import java.util.ArrayList;
+ import java.util.List;
+
  public class PuzzleSolver
  {
- 
+     private Graph graph;
+     private ArrayList<String> dictionary;
+
+     public void setGraph(Graph g) { graph = g; }
+     public Graph getGraph() { return graph; }
+
+     public void setDictionary(ArrayList<String> d) { dictionary = d; }
+     public ArrayList<String> getDictionary() { return dictionary; }
+
+     public PuzzleSolver(Graph graph, ArrayList<String> dictionary)
+     {
+         setGraph(graph);
+         setDictionary(dictionary);
+     }
+
+     public void solve()
+     {
+         boolean seenValue = true;
+         // For every vertex.
+         for(int i = 0; i < getGraph().getVerticies().length; i ++)
+         {
+             for(int j = 0; j < getGraph().getVerticies()[i]; j++)
+             {
+                 // Perform a breadth first search starting
+                 // at each node. Go in every direction to
+                 // see if we find a word.
+             }
+         }
+     }
+
  }
