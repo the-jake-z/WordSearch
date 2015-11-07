@@ -10,5 +10,63 @@
 
 public class Graph
 {
+    private Vertex[][] verticies;
 
+    public void setVerticies(Vertex[][] v) { verticies = v; }
+    public Vertex[][] getVerticies() { return verticies; }
+
+    public Graph(int rows, int columns)
+    {
+        verticies = new Vertex[rows][columns];
+    }
+
+    public void addVertex(int row, int column, String letter)
+    {
+        verticies[row][column] = new Vertex(letter);
+    }
+
+    public void populateEdges()
+    {
+        // Traverse the rows.
+        for(int i = 0; i < verticies.length; i++)
+        {
+            // Traverse the columns.
+            for(int j = 0; j < verticies[i].length; j++)
+            {
+                Vertex v = verticies[i][j];
+
+                // Add the "North Edge"
+                if(i > 0)
+                    v.addEdge(verticies[i-1][j], Direction.NORTH);
+
+                // Add the "North East Edge"
+                if(i > 0 && j < verticies[i].length - 1)
+                    v.addEdge(verticies[i-1][j+1], Direction.NORTH_EAST);
+
+                // Add the "East Edge"
+                if(j < verticies[i].length - 1)
+                    v.addEdge(verticies[i][j+1], Direction.EAST);
+
+                // Add the South East Edge
+                if(j < verticies[i].length - 1 && i < verticies.length - 1)
+                    v.addEdge(verticies[i+1][j+1], Direction.SOUTH_EAST);
+
+                // Add the "South Edge"
+                if(i < verticies.length - 1)
+                    v.addEdge(verticies[i+1][j], Direction.SOUTH);
+
+                // Add the "South West Edge"
+                if(i < verticies.length - 1 &&  j > 0)
+                    v.addEdge(verticies[i+1][j-1], Direction.SOUTH_WEST);
+
+                // Add the "West Edge"
+                if(j > 0)
+                    v.addEdge(verticies[i][j-1], Direction.WEST);
+
+                // Add the Northwest Edge
+                if(j > 0 && i > 0)
+                    v.addEdge(verticies[i-1][j-1], Direction.NORTH_WEST);
+            }
+        }
+    }
 }

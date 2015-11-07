@@ -16,7 +16,7 @@ public class WordSearch
 {
     private String puzzleSource;
     private String wordSource;
-
+    private Graph graph;
     private ArrayList<String> dictionary;
 
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
@@ -24,6 +24,9 @@ public class WordSearch
 
     public void setWordSource(String wSource) { wordSource = wSource; }
     public String getWordSource() { return wordSource; }
+
+    public void setGraph(Graph g) { graph = g; }
+    public Graph getGraph() { return graph; }
 
     public void setDictionary(ArrayList<String> dict) { dictionary = dict; }
     public ArrayList<String> getDictionary() {
@@ -53,19 +56,38 @@ public class WordSearch
         {
             if(lineNumber == 1)
             {
-                // Do something with the count.
+                int size = new Integer(line);
+                setGraph(new Graph(size, size));
             }
             else
             {
                 StringTokenizer tokenizer =
                     new StringTokenizer(line, delimiters);
 
+                int count = 0;
                 while(tokenizer.hasMoreTokens())
                 {
-                    System.out.println(tokenizer.nextToken());
+                    graph.addVertex(lineNumber - 2, count,
+                        tokenizer.nextToken());
+                    count++;
                 }
             }
         });
+
+        // Add in all the edges that we didn't do.
+        graph.populateEdges();
+
+        for(int i = 0; i < graph.getVerticies().length; i++)
+        {
+            for(int j = 0; j < graph.getVerticies()[i].length; j++)
+            {
+                Vertex v = graph.getVerticies()[i][j];
+                for(Edge e : v.getEdges())
+                {
+                    System.out.println(v.getLetter() + ": " + e.getToVertex().getLetter());
+                }
+            }
+        }
 
         fileReader.setFilePath(getWordSource());
 

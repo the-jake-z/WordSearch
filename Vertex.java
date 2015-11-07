@@ -15,7 +15,7 @@ import java.util.ArrayList;
      private String letter;
      // The edges leaving out of this vertex.
      private ArrayList<Edge> edges;
-
+     
      // Property Accessors.
      public void setLetter(String d) { letter = d; }
      public String getLetter() { return letter; }
