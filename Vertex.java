@@ -11,12 +11,29 @@
  public class Vertex
  {
      private String data;
+     private ArrayList<Edge> edges;
 
      public void setData(String d) { data = d; }
      public String getData() { return data;}
 
+     public void setEdges(ArrayList<Edge> e) { edges = e; }
+     public ArrayList<Edge> getEdges()
+     {
+         if(edges == null)
+         {
+             edges = new ArrayList<Edge>();
+         }
+
+         return edges;
+     }
+
      public Vertex(String data)
      {
         setData(data);
+     }
+
+     public void addEdge(Vertex toVertex, Direction d)
+     {
+         getEdges().add(new Vertex(toVertex, d));
      }
  }
