@@ -5,8 +5,8 @@
  * 		Date:		Nov 5, 2015
  *
  * 		This file is the main entry point for the program.
- *      The program reads in a file and then finds the words
- *      hidden inside of that file.
+ *      The program reads in a word search and then solves
+ *      the word search.
  */
 
 public class Main

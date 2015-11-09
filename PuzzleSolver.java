@@ -35,11 +35,9 @@
          // For every vertex.
          for(int i = 0; i < getGraph().getVerticies().length; i ++)
          {
-             for(int j = 0; j < getGraph().getVerticies()[i]; j++)
+             for(int j = 0; j < getGraph().getVerticies()[i].length; j++)
              {
-                 // Perform a breadth first search starting
-                 // at each node. Go in every direction to
-                 // see if we find a word.
+                 
              }
          }
      }

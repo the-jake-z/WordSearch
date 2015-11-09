@@ -69,4 +69,37 @@ public class Graph
             }
         }
     }
+
+    public Tree depthFirstSearch(Vertex startVertex)
+    {
+        LinkedList<Node> stack = new LinkedList<Node>();
+
+        for(int i = 0; i < verticies.length; i++)
+        {
+            for(int j = 0; j < verticies[i].length; j++)
+            {
+                vertex[i][j].setSeen(false);
+            }
+        }
+
+        stack.push(startVertex);
+
+        while(!stack.isEmpty())
+        {
+            Node node = stack.pop();
+            Vertex v = node.getVertex();
+
+            for(Edge e : v.getEdges())
+            {
+                Vertex toVertex = e.getToVertex();
+                if(!toVertex.getSeen())
+                {
+                    toVertex.setSeen(true);
+                    Node childNode = new Node(node, toVertex);
+                    node.addChild(childNode);
+                    stack.push(childNode);
+                }
+            }
+        }
+    }
 }
