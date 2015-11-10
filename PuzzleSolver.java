@@ -12,19 +12,20 @@
  import java.util.ArrayList;
  import java.util.Collections;
  import java.util.List;
+ import java.util.HashSet;
 
  public class PuzzleSolver
  {
      private Graph graph;
-     private ArrayList<String> dictionary;
+     private HashSet<String> dictionary;
 
      public void setGraph(Graph g) { graph = g; }
      public Graph getGraph() { return graph; }
 
-     public void setDictionary(ArrayList<String> d) { dictionary = d; }
-     public ArrayList<String> getDictionary() { return dictionary; }
+     public void setDictionary(HashSet<String> d) { dictionary = d; }
+     public HashSet<String> getDictionary() { return dictionary; }
 
-     public PuzzleSolver(Graph graph, ArrayList<String> dictionary)
+     public PuzzleSolver(Graph graph, HashSet<String> dictionary)
      {
          setGraph(graph);
          setDictionary(dictionary);
@@ -39,7 +40,7 @@
          {
              for(int j = 0; j < getGraph().getVerticies()[i].length; j++)
              {
-                 getGraph().depthFirstSearch(getGraph().getVerticies()[i][j]);
+                 getGraph().depthFirstSearch(i, j);
              }
          }
      }

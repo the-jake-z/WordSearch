@@ -12,17 +12,18 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.function.*;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class Graph
 {
     private Vertex[][] verticies;
-    public ArrayList<String> dictionary;
+    public HashSet<String> dictionary;
 
     public void setVerticies(Vertex[][] v) { verticies = v; }
     public Vertex[][] getVerticies() { return verticies; }
 
-    public void setDictionary(ArrayList<String> d) { dictionary = d; }
-    public ArrayList<String> getDictionary() { return dictionary; }
+    public void setDictionary(HashSet<String> d) { dictionary = d; }
+    public HashSet<String> getDictionary() { return dictionary; }
 
     public Graph(int rows, int columns)
     {
@@ -103,9 +104,10 @@ public class Graph
         }
     }
 
-    public void depthFirstSearch(Vertex startVertex)
+    public void depthFirstSearch(int row, int column)
     {
         LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
+        Vertex startVertex = verticies[row][column];
 
         for(int i = 0; i < verticies.length; i++)
         {
@@ -137,15 +139,10 @@ public class Graph
 
                         if(newString.length() > 3)
                         {
-                            int result = Collections.binarySearch(getDictionary(), newString, (String o1, String o2) -> {
-                                //System.out.println("o1: " + o1 + "\to2: " + o2);
-                                return o1.substring(0, o2.length() > o1.length() ? o1.length(): o2.length()).compareTo(o2);
-                            });
-
-                            if(result < 0) break;
-                            else if(getDictionary().get(result).equals(newString))
+                            if(getDictionary().contains(newString))
                             {
-                                System.out.printf("%s %s\n",newString, item.getDirection());
+                                System.out.printf("%s %s %d %d\n", newString, item.getDirection(),
+                                    row, column);
                             }
                         }
 

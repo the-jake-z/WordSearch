@@ -11,6 +11,7 @@
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class WordSearch
 {
@@ -18,7 +19,7 @@ public class WordSearch
     private String puzzleSource;
     private String wordSource;
     private Graph graph;
-    private ArrayList<String> dictionary;
+    private HashSet<String> dictionary;
 
     // Accessors
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
@@ -30,11 +31,11 @@ public class WordSearch
     public void setGraph(Graph g) { graph = g; }
     public Graph getGraph() { return graph; }
 
-    public void setDictionary(ArrayList<String> dict) { dictionary = dict; }
-    public ArrayList<String> getDictionary() {
+    public void setDictionary(HashSet<String> dict) { dictionary = dict; }
+    public HashSet<String> getDictionary() {
         // Lazy instantiation
         if(dictionary == null)
-            dictionary = new ArrayList<String>();
+            dictionary = new HashSet<String>();
 
         return dictionary;
     }
@@ -91,8 +92,5 @@ public class WordSearch
         {
             getDictionary().add(line);
         });
-
-        // Sort the dictionary so it's ready for use.
-        Collections.sort(getDictionary());
     }
 }
