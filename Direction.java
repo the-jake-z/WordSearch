@@ -24,5 +24,6 @@
     // Left
     WEST,
     // Up, Left
-    NORTH_WEST
+    NORTH_WEST,
+    ANY
  }

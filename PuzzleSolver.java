@@ -10,6 +10,7 @@
  */
 
  import java.util.ArrayList;
+ import java.util.Collections;
  import java.util.List;
 
  public class PuzzleSolver
@@ -31,13 +32,14 @@
 
      public void solve()
      {
+         graph.setDictionary(getDictionary());
          boolean seenValue = true;
          // For every vertex.
          for(int i = 0; i < getGraph().getVerticies().length; i ++)
          {
              for(int j = 0; j < getGraph().getVerticies()[i].length; j++)
              {
-                 
+                 getGraph().depthFirstSearch(getGraph().getVerticies()[i][j]);
              }
          }
      }

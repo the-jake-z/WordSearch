@@ -8,12 +8,21 @@
  *      puzzle. It also contains methods to traverse the graph.
  */
 
+import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.function.*;
+import java.util.Collections;
+
 public class Graph
 {
     private Vertex[][] verticies;
+    public ArrayList<String> dictionary;
 
     public void setVerticies(Vertex[][] v) { verticies = v; }
     public Vertex[][] getVerticies() { return verticies; }
+
+    public void setDictionary(ArrayList<String> d) { dictionary = d; }
+    public ArrayList<String> getDictionary() { return dictionary; }
 
     public Graph(int rows, int columns)
     {
@@ -70,34 +79,80 @@ public class Graph
         }
     }
 
-    public Tree depthFirstSearch(Vertex startVertex)
+    // Private internal class used for the DFS stack.
+    class DFSStackItem
     {
-        LinkedList<Node> stack = new LinkedList<Node>();
+        private Vertex vertex;
+        private Direction direction;
+        private String currentString;
+
+        public void setVertex(Vertex v) { vertex = v; }
+        public Vertex getVertex() { return vertex; }
+
+        public void setDirection(Direction d) { direction = d; }
+        public Direction getDirection() { return direction; }
+
+        public void setCurrentString(String s) { currentString = s; }
+        public String getCurrentString() { return currentString; }
+
+        public DFSStackItem(Vertex v, Direction d, String s)
+        {
+            setVertex(v);
+            setDirection(d);
+            setCurrentString(s);
+        }
+    }
+
+    public void depthFirstSearch(Vertex startVertex)
+    {
+        LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
 
         for(int i = 0; i < verticies.length; i++)
         {
             for(int j = 0; j < verticies[i].length; j++)
             {
-                vertex[i][j].setSeen(false);
+                verticies[i][j].setSeen(false);
             }
         }
 
-        stack.push(startVertex);
+        stack.push(new DFSStackItem(
+                startVertex, Direction.ANY, startVertex.getLetter()));
 
         while(!stack.isEmpty())
         {
-            Node node = stack.pop();
-            Vertex v = node.getVertex();
+            DFSStackItem item = stack.pop();
+            Vertex v = item.getVertex();
 
             for(Edge e : v.getEdges())
             {
-                Vertex toVertex = e.getToVertex();
-                if(!toVertex.getSeen())
+                if(e.getDirection() == item.getDirection() ||
+                    item.getDirection() == Direction.ANY)
                 {
-                    toVertex.setSeen(true);
-                    Node childNode = new Node(node, toVertex);
-                    node.addChild(childNode);
-                    stack.push(childNode);
+                    Vertex toVertex = e.getToVertex();
+
+                    if(!toVertex.getSeen())
+                    {
+                        String newString = String.format("%s%s", item.getCurrentString(),
+                            toVertex.getLetter());
+
+                        if(newString.length() > 3)
+                        {
+                            int result = Collections.binarySearch(getDictionary(), newString, (String o1, String o2) -> {
+                                //System.out.println("o1: " + o1 + "\to2: " + o2);
+                                return o1.substring(0, o2.length() > o1.length() ? o1.length(): o2.length()).compareTo(o2);
+                            });
+
+                            if(result < 0) break;
+                            else if(getDictionary().get(result).equals(newString))
+                            {
+                                System.out.printf("%s %s\n",newString, item.getDirection());
+                            }
+                        }
+
+                        toVertex.setSeen(true);
+                        stack.push(new DFSStackItem(toVertex, e.getDirection(),
+                            newString));
+                    }
                 }
             }
         }
