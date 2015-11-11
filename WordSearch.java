@@ -51,9 +51,9 @@ public class WordSearch
     public void run()
     {
         initalizeSources();
-        getGraph().setDictionary(getDictionary());
-        getGraph().forEachVertex((Integer row, Integer column) -> {
-            getGraph().depthFirstSearch(row, column);
+        graph.setDictionary(dictionary);
+        graph.forEachVertex((Integer row, Integer column) -> {
+            graph.depthFirstSearch(row, column);
         });
     }
 
