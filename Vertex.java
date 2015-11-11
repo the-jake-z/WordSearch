@@ -36,7 +36,7 @@ import java.util.ArrayList;
      }
 
      // Convenience method.
-     public void addEdge(Vertex toVertex, byte d)
+     public void addEdge(Vertex toVertex, Direction d)
      {
          getEdges().add(new Edge(toVertex, d));
      }

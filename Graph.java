@@ -88,19 +88,19 @@ public class Graph
     class DFSStackItem
     {
         private Vertex vertex;
-        private byte direction;
+        private Direction direction;
         private String currentString;
 
         public void setVertex(Vertex v) { vertex = v; }
         public Vertex getVertex() { return vertex; }
 
-        public void setDirection(byte d) { direction = d; }
-        public byte getDirection() { return direction; }
+        public void setDirection(Direction d) { direction = d; }
+        public Direction getDirection() { return direction; }
 
         public void setCurrentString(String s) { currentString = s; }
         public String getCurrentString() { return currentString; }
 
-        public DFSStackItem(Vertex v, byte d, String s)
+        public DFSStackItem(Vertex v, Direction d, String s)
         {
             setVertex(v);
             setDirection(d);
@@ -124,7 +124,7 @@ public class Graph
             for(Edge e : v.getEdges())
             {
                 Vertex toVertex = e.getToVertex();
-                byte d = item.getDirection();
+                Direction d = item.getDirection();
 
                 if(e.getDirection() == d || d == Direction.ANY)
                 {
@@ -138,7 +138,7 @@ public class Graph
                             newString,
                             column + 1, // because not zero index
                             row + 1, // because not zero index.
-                            Direction.toString(d));
+                            d);
                     }
 
                     stack.push(new DFSStackItem(toVertex, e.getDirection(),

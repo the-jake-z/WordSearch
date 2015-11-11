@@ -7,51 +7,27 @@
  * 		This file stores readable direction values.
  */
 
- public class Direction
+ public enum Direction
  {
-    // Up
-    public static final byte NORTH = 1;
-    // Up, Right
-    public static final byte NORTH_EAST = 2;
-    // Right
-    public static final byte EAST = 3;
-    // Down, Right
-    public static final byte SOUTH_EAST = 4;
-    // Down
-    public static final byte SOUTH = 5;
-    // Down, Left
-    public static final byte SOUTH_WEST = 6;
-    // Left
-    public static final byte WEST = 7;
-    // Up, Left
-    public static final byte NORTH_WEST = 8;
+    NORTH ("n"),
+    NORTH_EAST ("ne"),
+    EAST ("e"),
+    SOUTH_EAST ("se"),
+    SOUTH ("s"),
+    SOUTH_WEST ("sw"),
+    WEST ("w"),
+    NORTH_WEST ("nw"),
+    ANY ("n/a");
 
-    public static final byte ANY = 9;
+    private final String display;
 
-    public static String toString(byte d)
+    private Direction(String s)
     {
-        switch(d)
-        {
-            case NORTH:
-                return "n";
-            case NORTH_EAST:
-                return "ne";
-            case EAST:
-                return "e";
-            case SOUTH_EAST:
-                return "se";
-            case SOUTH:
-                return "s";
-            case SOUTH_WEST:
-                return "sw";
-            case WEST:
-                return "w";
-            case NORTH_WEST:
-                return "nw";
-            case ANY:
-                return "n/a";
-        }
+        display = s;
+    }
 
-        return "";
+    public String toString()
+    {
+        return display;
     }
  }
