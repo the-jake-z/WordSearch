@@ -11,20 +11,20 @@
  {
      // The direction to get to this vertex from whoever
      // initalized us.
-     private Direction direction;
+     private byte direction;
 
      // The vertex this edge takes us to.
      private Vertex toVertex;
 
      // Property Accessors
-     public void setDirection(Direction d) { direction = d; }
-     public Direction getDirection() { return direction; }
+     public void setDirection(byte d) { direction = d; }
+     public byte getDirection() { return direction; }
 
      public void setToVertex(Vertex v) { toVertex = v; }
      public Vertex getToVertex() { return toVertex; }
 
      // Constructor
-     public Edge(Vertex toVertex, Direction d )
+     public Edge(Vertex toVertex, byte d )
      {
          setToVertex(toVertex);
          setDirection(d);

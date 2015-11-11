@@ -10,7 +10,7 @@
 
 import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.function.*;
+import java.util.function.BiConsumer;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -35,68 +35,72 @@ public class Graph
         verticies[row][column] = new Vertex(letter);
     }
 
-    public void populateEdges()
+    public void forEachVertex(BiConsumer<Integer, Integer> consumer)
     {
-        // Traverse the rows.
         for(int i = 0; i < verticies.length; i++)
         {
-            // Traverse the columns.
             for(int j = 0; j < verticies[i].length; j++)
             {
-                Vertex v = verticies[i][j];
-
-                // Add the "North Edge"
-                if(i > 0)
-                    v.addEdge(verticies[i-1][j], Direction.NORTH);
-
-                // Add the "North East Edge"
-                if(i > 0 && j < verticies[i].length - 1)
-                    v.addEdge(verticies[i-1][j+1], Direction.NORTH_EAST);
-
-                // Add the "East Edge"
-                if(j < verticies[i].length - 1)
-                    v.addEdge(verticies[i][j+1], Direction.EAST);
-
-                // Add the South East Edge
-                if(j < verticies[i].length - 1 && i < verticies.length - 1)
-                    v.addEdge(verticies[i+1][j+1], Direction.SOUTH_EAST);
-
-                // Add the "South Edge"
-                if(i < verticies.length - 1)
-                    v.addEdge(verticies[i+1][j], Direction.SOUTH);
-
-                // Add the "South West Edge"
-                if(i < verticies.length - 1 &&  j > 0)
-                    v.addEdge(verticies[i+1][j-1], Direction.SOUTH_WEST);
-
-                // Add the "West Edge"
-                if(j > 0)
-                    v.addEdge(verticies[i][j-1], Direction.WEST);
-
-                // Add the Northwest Edge
-                if(j > 0 && i > 0)
-                    v.addEdge(verticies[i-1][j-1], Direction.NORTH_WEST);
+                consumer.accept(i, j);
             }
         }
+    }
+
+    public void populateEdges()
+    {
+        forEachVertex((Integer row, Integer column) -> {
+            Vertex v = verticies[row][column];
+            // Add the "North Edge"
+            if(row > 0)
+                v.addEdge(verticies[row-1][column], Direction.NORTH);
+
+            // Add the "North East Edge"
+            if(row > 0 && column < verticies[row].length - 1)
+                v.addEdge(verticies[row-1][column+1], Direction.NORTH_EAST);
+
+            // Add the "East Edge"
+            if(column < verticies[row].length - 1)
+                v.addEdge(verticies[row][column+1], Direction.EAST);
+
+            // Add the South East Edge
+            if(column < verticies[row].length - 1 && row < verticies.length - 1)
+                v.addEdge(verticies[row+1][column+1], Direction.SOUTH_EAST);
+
+            // Add the "South Edge"
+            if(row < verticies.length - 1)
+                v.addEdge(verticies[row+1][column], Direction.SOUTH);
+
+            // Add the "South West Edge"
+            if(row < verticies.length - 1 &&  column > 0)
+                v.addEdge(verticies[row+1][column-1], Direction.SOUTH_WEST);
+
+            // Add the "West Edge"
+            if(column > 0)
+                v.addEdge(verticies[row][column-1], Direction.WEST);
+
+            // Add the Northwest Edge
+            if(column > 0 && row > 0)
+                v.addEdge(verticies[row-1][column-1], Direction.NORTH_WEST);
+        });
     }
 
     // Private internal class used for the DFS stack.
     class DFSStackItem
     {
         private Vertex vertex;
-        private Direction direction;
+        private byte direction;
         private String currentString;
 
         public void setVertex(Vertex v) { vertex = v; }
         public Vertex getVertex() { return vertex; }
 
-        public void setDirection(Direction d) { direction = d; }
-        public Direction getDirection() { return direction; }
+        public void setDirection(byte d) { direction = d; }
+        public byte getDirection() { return direction; }
 
         public void setCurrentString(String s) { currentString = s; }
         public String getCurrentString() { return currentString; }
 
-        public DFSStackItem(Vertex v, Direction d, String s)
+        public DFSStackItem(Vertex v, byte d, String s)
         {
             setVertex(v);
             setDirection(d);
@@ -109,13 +113,9 @@ public class Graph
         LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
         Vertex startVertex = verticies[row][column];
 
-        for(int i = 0; i < verticies.length; i++)
-        {
-            for(int j = 0; j < verticies[i].length; j++)
-            {
-                verticies[i][j].setSeen(false);
-            }
-        }
+        forEachVertex((Integer r, Integer c)-> {
+            verticies[r][c].setSeen(false);
+        });
 
         stack.push(new DFSStackItem(
                 startVertex, Direction.ANY, startVertex.getLetter()));
@@ -134,15 +134,19 @@ public class Graph
 
                     if(!toVertex.getSeen())
                     {
-                        String newString = String.format("%s%s", item.getCurrentString(),
-                            toVertex.getLetter());
+                        String newString =
+                            item.getCurrentString() + toVertex.getLetter();
 
                         if(newString.length() > 3)
                         {
                             if(getDictionary().contains(newString))
                             {
-                                System.out.printf("%s %s %d %d\n", newString, item.getDirection(),
-                                    row, column);
+                                System.out.printf(
+                                    "%s (%d,%d,%s)\n",
+                                    newString,
+                                    column + 1,
+                                    row + 1,
+                                    Direction.toString(item.getDirection()));
                             }
                         }
 

@@ -51,8 +51,10 @@ public class WordSearch
     public void run()
     {
         initalizeSources();
-        PuzzleSolver solver = new PuzzleSolver(getGraph(), getDictionary());
-        solver.solve();
+        getGraph().setDictionary(getDictionary());
+        getGraph().forEachVertex((Integer row, Integer column) -> {
+            getGraph().depthFirstSearch(row, column);
+        });
     }
 
     // Load up our graph and our dictionary.
