@@ -13,8 +13,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-
-        WordSearch wordSearch = new WordSearch("puzzle-40.txt", "words.txt");
+        WordSearch wordSearch = new WordSearch("puzzle.txt", "words.txt");
         wordSearch.run();
     }
 
