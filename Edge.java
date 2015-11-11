@@ -9,7 +9,7 @@
 
  public class Edge
  {
-     // The direction to get to this vertex from whoever
+     // The direction to get to the to vertex from whoever
      // initalized us.
      private Direction direction;
 
