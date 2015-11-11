@@ -21,13 +21,7 @@
 
     private final String display;
 
-    private Direction(String s)
-    {
-        display = s;
-    }
+    private Direction(String s) { display = s; }
 
-    public String toString()
-    {
-        return display;
-    }
+    public String toString() { return display; }
  }
