@@ -113,10 +113,6 @@ public class Graph
         LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
         Vertex startVertex = verticies[row][column];
 
-        forEachVertex((Integer r, Integer c)-> {
-            verticies[r][c].setSeen(false);
-        });
-
         stack.push(new DFSStackItem(
                 startVertex, Direction.ANY, startVertex.getLetter()));
 
@@ -127,33 +123,26 @@ public class Graph
 
             for(Edge e : v.getEdges())
             {
-                if(e.getDirection() == item.getDirection() ||
-                    item.getDirection() == Direction.ANY)
+                Vertex toVertex = e.getToVertex();
+                byte d = item.getDirection();
+
+                if(e.getDirection() == d || d == Direction.ANY)
                 {
-                    Vertex toVertex = e.getToVertex();
+                    String newString = item.getCurrentString() + toVertex.getLetter();
 
-                    if(!toVertex.getSeen())
+                    if(newString.length() > 3 &&
+                        getDictionary().contains(newString))
                     {
-                        String newString =
-                            item.getCurrentString() + toVertex.getLetter();
-
-                        if(newString.length() > 3)
-                        {
-                            if(getDictionary().contains(newString))
-                            {
-                                System.out.printf(
-                                    "%s (%d,%d,%s)\n",
-                                    newString,
-                                    column + 1,
-                                    row + 1,
-                                    Direction.toString(item.getDirection()));
-                            }
-                        }
-
-                        toVertex.setSeen(true);
-                        stack.push(new DFSStackItem(toVertex, e.getDirection(),
-                            newString));
+                        System.out.printf(
+                            "%s (%d,%d,%s)\n",
+                            newString,
+                            column + 1, // because not zero index
+                            row + 1, // because not zero index.
+                            Direction.toString(d));
                     }
+
+                    stack.push(new DFSStackItem(toVertex, e.getDirection(),
+                        newString));
                 }
             }
         }
