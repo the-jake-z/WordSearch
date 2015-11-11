@@ -84,6 +84,45 @@ public class Graph
         });
     }
 
+    public void depthFirstSearch(int row, int column)
+    {
+        LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
+        Vertex startVertex = verticies[row][column];
+
+        stack.push(new DFSStackItem(
+                startVertex, Direction.ANY, startVertex.getLetter()));
+
+        while(!stack.isEmpty())
+        {
+            DFSStackItem item = stack.pop();
+            Vertex v = item.getVertex();
+
+            for(Edge e : v.getEdges())
+            {
+                Vertex toVertex = e.getToVertex();
+                Direction d = item.getDirection();
+
+                // We only want items that would be valid traversals on
+                // the stack.
+                if(e.getDirection() == d || d == Direction.ANY)
+                {
+                    String newString = item.getCurrentString() + toVertex.getLetter();
+
+                    if(newString.length() > 3 &&
+                        getDictionary().contains(newString))
+                    {
+                        System.out.printf(
+                            "%s (%d,%d,%s)\n",
+                            newString, column + 1, row + 1, d);
+                    }
+
+                    stack.push(new DFSStackItem(toVertex, e.getDirection(),
+                        newString));
+                }
+            }
+        }
+    }
+
     // Private internal class used for the DFS stack.
     class DFSStackItem
     {
@@ -105,46 +144,6 @@ public class Graph
             setVertex(v);
             setDirection(d);
             setCurrentString(s);
-        }
-    }
-
-    public void depthFirstSearch(int row, int column)
-    {
-        LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
-        Vertex startVertex = verticies[row][column];
-
-        stack.push(new DFSStackItem(
-                startVertex, Direction.ANY, startVertex.getLetter()));
-
-        while(!stack.isEmpty())
-        {
-            DFSStackItem item = stack.pop();
-            Vertex v = item.getVertex();
-
-            for(Edge e : v.getEdges())
-            {
-                Vertex toVertex = e.getToVertex();
-                Direction d = item.getDirection();
-
-                if(e.getDirection() == d || d == Direction.ANY)
-                {
-                    String newString = item.getCurrentString() + toVertex.getLetter();
-
-                    if(newString.length() > 3 &&
-                        getDictionary().contains(newString))
-                    {
-                        System.out.printf(
-                            "%s (%d,%d,%s)\n",
-                            newString,
-                            column + 1, // because not zero index
-                            row + 1, // because not zero index.
-                            d);
-                    }
-
-                    stack.push(new DFSStackItem(toVertex, e.getDirection(),
-                        newString));
-                }
-            }
         }
     }
 }
