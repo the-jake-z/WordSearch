@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Iterator;
 
 public class Graph
 {
@@ -89,34 +91,48 @@ public class Graph
         LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
         Vertex startVertex = verticies[row][column];
 
+        String newString = null;
+        Vertex toVertex = null;
+        Direction d = Direction.ANY;
+
         stack.push(new DFSStackItem(
-                startVertex, Direction.ANY, startVertex.getLetter()));
+                startVertex, d, startVertex.getLetter()));
 
         while(!stack.isEmpty())
         {
             DFSStackItem item = stack.pop();
-            Vertex v = item.getVertex();
+            Vertex vertex = item.getVertex();
 
-            for(Edge e : v.getEdges())
+            if(item.getDirection() == Direction.ANY)
             {
-                Vertex toVertex = e.getToVertex();
-                Direction d = item.getDirection();
 
-                // We only want items that would be valid traversals on
-                // the stack.
-                if(e.getDirection() == d || d == Direction.ANY)
+                Iterator iterator = vertex.getEdges().entrySet().iterator();
+                while(iterator.hasNext())
                 {
-                    String newString = item.getCurrentString() + toVertex.getLetter();
+                    Map.Entry pair = (Map.Entry)iterator.next();
+                    toVertex = (Vertex)pair.getValue();
+                    newString = item.getCurrentString() + toVertex.getLetter();
+                    d = (Direction) pair.getKey();
+                    stack.push(new DFSStackItem(toVertex, d,
+                        newString));
+                }
+            }
+            else
+            {
+                if(vertex.getEdges().containsKey(item.getDirection()))
+                {
+                    toVertex = vertex.getEdges().get(item.getDirection());
+                    newString = item.getCurrentString() + toVertex.getLetter();
 
                     if(newString.length() > 3 &&
                         getDictionary().contains(newString))
                     {
                         System.out.printf(
                             "%s (%d,%d,%s)\n",
-                            newString, column + 1, row + 1, d);
+                            newString, column + 1, row + 1, item.getDirection());
                     }
 
-                    stack.push(new DFSStackItem(toVertex, e.getDirection(),
+                    stack.push(new DFSStackItem(toVertex, item.getDirection(),
                         newString));
                 }
             }

@@ -7,24 +7,24 @@
  * 		This file stores all the data on a vertex.
  */
 
-import java.util.ArrayList;
+import java.util.EnumMap;
 
  public class Vertex
  {
      // The letter of this vertex.
      private String letter;
      // The edges leaving out of this vertex.
-     private ArrayList<Edge> edges;
+     private EnumMap<Direction, Vertex> edges;
      // Property Accessors.
      public void setLetter(String d) { letter = d; }
      public String getLetter() { return letter; }
 
-     public void setEdges(ArrayList<Edge> e) { edges = e; }
-     public ArrayList<Edge> getEdges()
+     public void setEdges(EnumMap<Direction, Vertex> e) { edges = e; }
+     public EnumMap<Direction, Vertex> getEdges()
      {
          // Lazy instantiation.
          if(edges == null)
-             edges = new ArrayList<Edge>();
+             edges = new EnumMap<Direction, Vertex>(Direction.class);
 
          return edges;
      }
@@ -38,6 +38,6 @@ import java.util.ArrayList;
      // Convenience method.
      public void addEdge(Vertex toVertex, Direction d)
      {
-         getEdges().add(new Edge(toVertex, d));
+         getEdges().put(d, toVertex);
      }
  }
