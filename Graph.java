@@ -8,10 +8,10 @@
  *      puzzle. It also contains methods to traverse the graph.
  */
 
-import java.util.LinkedList; // Used for the Stack.
+import java.util.LinkedList;
 import java.util.function.BiConsumer;
-import java.util.HashSet; // Used for the dictionary of words.
-import java.util.Map; // Used for Map.Entrys
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Iterator;
 
 public class Graph

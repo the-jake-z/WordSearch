@@ -8,9 +8,6 @@
  *      necessary data for the search.
  */
 
-import java.util.ArrayList;
-import java.util.StringTokenizer;
-import java.util.Collections;
 import java.util.HashSet;
 
 public class WordSearch
