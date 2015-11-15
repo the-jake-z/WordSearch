@@ -10,8 +10,7 @@
 
 import java.util.HashSet;
 
-public class WordSearch
-{
+public class WordSearch {
     // Private Properties
     private String puzzleSource;
     private String wordSource;
@@ -20,7 +19,7 @@ public class WordSearch
 
     // Accessors
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
-    public String getPuzzleSource() { return puzzleSource;}
+    public String getPuzzleSource() { return puzzleSource; }
 
     public void setWordSource(String wSource) { wordSource = wSource; }
     public String getWordSource() { return wordSource; }
@@ -38,15 +37,13 @@ public class WordSearch
     }
 
     // Constructor
-    public WordSearch(String puzzleSource, String wordSource)
-    {
+    public WordSearch(String puzzleSource, String wordSource) {
         setPuzzleSource(puzzleSource);
         setWordSource(wordSource);
     }
 
     // Where the action happens.
-    public void run()
-    {
+    public void run() {
         initalizeSources();
         graph.setDictionary(dictionary);
         graph.forEachVertex((Integer row, Integer column) -> {
@@ -55,23 +52,18 @@ public class WordSearch
     }
 
     // Load up our graph and our dictionary.
-    private void initalizeSources()
-    {
+    private void initalizeSources() {
         final FileReader fileReader = new FileReader(getPuzzleSource());
         final String delimiters = " ";
-        fileReader.forEachLine((String line, Integer lineNumber) ->
-        {
+        fileReader.forEachLine((String line, Integer lineNumber) -> {
             // The first line of this file contains the size of the puzzle
             // we need to solve. Treat it differntly than all the rest.
-            if(lineNumber == 1)
-            {
+            if(lineNumber == 1) {
                 // Get the size of the puzzle.
                 int size = new Integer(line);
                 // Initalize a new square graph.
                 setGraph(new Graph(size, size));
-            }
-            else
-            {
+            } else {
                 // Split the string based on spaces.
                 String[] letters = line.split(" ");
 
@@ -87,8 +79,7 @@ public class WordSearch
         fileReader.setFilePath(getWordSource());
 
         // Read in the dictionary.
-        fileReader.forEachLine((String line, Integer lineNumber) ->
-        {
+        fileReader.forEachLine((String line, Integer lineNumber) -> {
             getDictionary().add(line);
         });
     }

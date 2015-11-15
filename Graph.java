@@ -14,8 +14,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Iterator;
 
-public class Graph
-{
+public class Graph {
     // 2D Array allows direct access to any vertex.
     private Vertex[][] verticies;
     // Hash Set of all Dictionary terms. Allows for O(1) search.
@@ -29,32 +28,26 @@ public class Graph
     public HashSet<String> getDictionary() { return dictionary; }
 
     // Constructor
-    public Graph(int rows, int columns)
-    {
+    public Graph(int rows, int columns) {
         verticies = new Vertex[rows][columns];
     }
 
     // Convenience
-    public void addVertex(int row, int column, char letter)
-    {
+    public void addVertex(int row, int column, char letter) {
         verticies[row][column] = new Vertex(letter);
     }
 
     // Convenience
-    public void forEachVertex(BiConsumer<Integer, Integer> consumer)
-    {
-        for(int i = 0; i < verticies.length; i++)
-        {
-            for(int j = 0; j < verticies[i].length; j++)
-            {
+    public void forEachVertex(BiConsumer<Integer, Integer> consumer) {
+        for(int i = 0; i < verticies.length; i++) {
+            for(int j = 0; j < verticies[i].length; j++) {
                 consumer.accept(i, j);
             }
         }
     }
 
     // This method links each vertex to all adjacent verticies.
-    public void populateEdges()
-    {
+    public void populateEdges() {
         forEachVertex((Integer row, Integer column) -> {
             Vertex v = verticies[row][column];
             // Add the "North Edge"
@@ -92,8 +85,7 @@ public class Graph
     }
 
     // Performs a valid depth first search at each vertex.
-    public void depthFirstSearch(int row, int column)
-    {
+    public void depthFirstSearch(int row, int column) {
         // Inititalize a stack.
         LinkedList<DFSStackItem> stack = new LinkedList<DFSStackItem>();
         // Use the 2D array to get direct access to our start vertex.
@@ -113,12 +105,10 @@ public class Graph
             Vertex vertex = item.getVertex();
 
             // This will be used the first time only.
-            if(item.getDirection() == Direction.ANY)
-            {
+            if(item.getDirection() == Direction.ANY) {
 
                 Iterator iterator = vertex.getEdges().entrySet().iterator();
-                while(iterator.hasNext())
-                {
+                while(iterator.hasNext()) {
                     Map.Entry pair = (Map.Entry)iterator.next();
                     toVertex = (Vertex)pair.getValue();
                     newString = item.getCurrentString() + toVertex.getLetter();
@@ -133,15 +123,13 @@ public class Graph
                 // next best option.
             }
 
-            if(vertex.getEdges().containsKey(item.getDirection()))
-            {
+            if(vertex.getEdges().containsKey(item.getDirection())) {
                 toVertex = vertex.getEdges().get(item.getDirection());
                 newString = item.getCurrentString() + toVertex.getLetter();
 
                 // If we find a word, print it ASAP.
                 if(newString.length() > 3 &&
-                    getDictionary().contains(newString))
-                {
+                    getDictionary().contains(newString)) {
                     System.out.printf(
                         "%s (%d,%d,%s)\n",
                         newString, column + 1, row + 1, item.getDirection());
@@ -154,8 +142,7 @@ public class Graph
     }
 
     // Private internal class used for the DFS stack.
-    class DFSStackItem
-    {
+    class DFSStackItem {
         // The Vertex we are going to do our DFS at.
         private Vertex vertex;
         // The current direction we're traveling.
@@ -174,8 +161,7 @@ public class Graph
         public String getCurrentString() { return currentString; }
 
         // Constructor
-        public DFSStackItem(Vertex v, Direction d, String s)
-        {
+        public DFSStackItem(Vertex v, Direction d, String s) {
             setVertex(v);
             setDirection(d);
             setCurrentString(s);

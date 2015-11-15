@@ -7,8 +7,7 @@
  * 		This file stores readable direction values.
  */
 
- public enum Direction
- {
+ public enum Direction {
     NORTH ("n"),
     NORTH_EAST ("ne"),
     EAST ("e"),

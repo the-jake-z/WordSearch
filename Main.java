@@ -9,15 +9,12 @@
  *      the word search.
  */
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
         new WordSearch("puzzle.txt", "words.txt").run();
     }
 
-    public static void exitWithError(String errorMessage)
-    {
+    public static void exitWithError(String errorMessage) {
         // Print the error in red.
         System.err.println(errorMessage);
 

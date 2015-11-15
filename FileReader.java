@@ -20,8 +20,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.function.BiConsumer;
 
-public class FileReader
-{
+public class FileReader {
     // Properties
     private String filePath;
     private FileInputStream inputStream;
@@ -36,13 +35,11 @@ public class FileReader
     public void setInputStream(FileInputStream i) { inputStream = i; }
     public FileInputStream getInputStream() { return inputStream; }
 
-    public void setInputStreamReader(InputStreamReader i)
-    {
+    public void setInputStreamReader(InputStreamReader i) {
         inputStreamReader = i;
     }
 
-    public InputStreamReader getInputStreamReader()
-    {
+    public InputStreamReader getInputStreamReader() {
         return inputStreamReader;
     }
 
@@ -56,14 +53,12 @@ public class FileReader
     private void incrementLine() { currentLine ++; }
 
     // Constructor
-    public FileReader(String path)
-    {
+    public FileReader(String path) {
         setFilePath(path);
     }
 
     // Uses a lamda to deal with every line. Thanks, Java 8
-    public void forEachLine(BiConsumer<String, Integer> lambda)
-    {
+    public void forEachLine(BiConsumer<String, Integer> lambda) {
         try {
             // Create our input stream objects.
             setInputStream(new FileInputStream(getFilePath()));
@@ -77,8 +72,7 @@ public class FileReader
             // Set our current line to 1.
             setCurrentLine(1);
 
-            while((line = reader.readLine()) != null)
-            {
+            while((line = reader.readLine()) != null) {
                 // Call the function that was passed in
                 lambda.accept(line, new Integer(getCurrentLine()));
                 incrementLine();
@@ -87,18 +81,12 @@ public class FileReader
             getInputStream().close();
             getInputStreamReader().close();
             getBufferedReader().close();
-        }
-        catch (UnsupportedEncodingException ex)
-        {
+        } catch (UnsupportedEncodingException ex) {
             Main.exitWithError(
                 "The encoding used was incompatible with the file.");
-        }
-        catch (FileNotFoundException ex)
-        {
+        } catch (FileNotFoundException ex) {
             Main.exitWithError("The file you entered was not found.");
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Main.exitWithError(
                 "There was an IO error while attempting to read the file.");
         }
