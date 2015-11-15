@@ -30,9 +30,7 @@ public class WordSearch {
     public void setDictionary(HashSet<String> dict) { dictionary = dict; }
     public HashSet<String> getDictionary() {
         // Lazy instantiation
-        if(dictionary == null)
-            dictionary = new HashSet<String>();
-
+        if(dictionary == null) dictionary = new HashSet<String>();
         return dictionary;
     }
 

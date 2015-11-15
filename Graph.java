@@ -40,9 +40,8 @@ public class Graph {
     // Convenience
     public void forEachVertex(BiConsumer<Integer, Integer> consumer) {
         for(int i = 0; i < verticies.length; i++) {
-            for(int j = 0; j < verticies[i].length; j++) {
+            for(int j = 0; j < verticies[i].length; j++)
                 consumer.accept(i, j);
-            }
         }
     }
 
@@ -50,35 +49,38 @@ public class Graph {
     public void populateEdges() {
         forEachVertex((Integer row, Integer column) -> {
             Vertex v = verticies[row][column];
-            // Add the "North Edge"
+            // If we are in a row after the first.
             if(row > 0)
                 v.addEdge(verticies[row-1][column], Direction.NORTH);
 
-            // Add the "North East Edge"
+            // If we are in a row after the first, and a column before
+            // the last.
             if(row > 0 && column < verticies[row].length - 1)
                 v.addEdge(verticies[row-1][column+1], Direction.NORTH_EAST);
 
-            // Add the "East Edge"
+            // If we are in a column before the last.
             if(column < verticies[row].length - 1)
                 v.addEdge(verticies[row][column+1], Direction.EAST);
 
-            // Add the South East Edge
+            // If we are in a row that isn't the last one and we
+            // aren't in the last column.
             if(column < verticies[row].length - 1 && row < verticies.length - 1)
                 v.addEdge(verticies[row+1][column+1], Direction.SOUTH_EAST);
 
-            // Add the "South Edge"
+            // If we are in a row that is less than the last row.
             if(row < verticies.length - 1)
                 v.addEdge(verticies[row+1][column], Direction.SOUTH);
 
-            // Add the "South West Edge"
+            // If we are in a row less than the last row and we aren't
+            // in the first column.
             if(row < verticies.length - 1 &&  column > 0)
                 v.addEdge(verticies[row+1][column-1], Direction.SOUTH_WEST);
 
-            // Add the "West Edge"
+            // If we are not in the first column.
             if(column > 0)
                 v.addEdge(verticies[row][column-1], Direction.WEST);
 
-            // Add the Northwest Edge
+            //  If we are not in the first column and not in the first row
             if(column > 0 && row > 0)
                 v.addEdge(verticies[row-1][column-1], Direction.NORTH_WEST);
         });

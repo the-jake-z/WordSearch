@@ -9,7 +9,7 @@
 
 import java.util.EnumMap;
 
- public class Vertex {
+public class Vertex {
      // The letter of this vertex.
      private char letter;
      // The edges leaving out of this vertex.
@@ -27,7 +27,7 @@ import java.util.EnumMap;
      public EnumMap<Direction, Vertex> getEdges() {
          // Lazy instantiation.
          if(edges == null)
-             edges = new EnumMap<Direction, Vertex>(Direction.class);
+            edges = new EnumMap<Direction, Vertex>(Direction.class);
 
          return edges;
      }
