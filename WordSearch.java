@@ -80,7 +80,7 @@ public class WordSearch
 
                 // Add a vertex for every letter in the line.
                 for(int i = 0; i < letters.length; i++)
-                    graph.addVertex(lineNumber - 2, i, letters[i]);
+                    graph.addVertex(lineNumber - 2, i, letters[i].charAt(0));
             }
         });
 

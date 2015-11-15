@@ -17,7 +17,7 @@
     SOUTH_WEST ("sw"),
     WEST ("w"),
     NORTH_WEST ("nw"),
-    ANY ("n/a");
+    ANY ("n/a"); // Used for the first inital direction.
 
     private final String display;
 

@@ -36,7 +36,6 @@ public class FileReader
     public void setInputStream(FileInputStream i) { inputStream = i; }
     public FileInputStream getInputStream() { return inputStream; }
 
-    // I wish these would fit on one line without wrapping.
     public void setInputStreamReader(InputStreamReader i)
     {
         inputStreamReader = i;

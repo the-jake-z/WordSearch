@@ -12,14 +12,19 @@ import java.util.EnumMap;
  public class Vertex
  {
      // The letter of this vertex.
-     private String letter;
+     private char letter;
      // The edges leaving out of this vertex.
      private EnumMap<Direction, Vertex> edges;
      // Property Accessors.
-     public void setLetter(String d) { letter = d; }
-     public String getLetter() { return letter; }
+     public void setLetter(char d) { letter = d; }
+     public char getLetter() { return letter; }
 
      public void setEdges(EnumMap<Direction, Vertex> e) { edges = e; }
+
+     // EnumMap was chosen to allow constant time access to any
+     // direction without creating either a bunch of methods
+     // or a bunch of pointers and subsequent logic that would have
+     // to go with it.
      public EnumMap<Direction, Vertex> getEdges()
      {
          // Lazy instantiation.
@@ -30,12 +35,12 @@ import java.util.EnumMap;
      }
 
      // Constructor
-     public Vertex(String letter)
+     public Vertex(char letter)
      {
         setLetter(letter);
      }
 
-     // Convenience method.
+     // Convenience
      public void addEdge(Vertex toVertex, Direction d)
      {
          getEdges().put(d, toVertex);
