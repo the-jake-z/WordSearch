@@ -11,7 +11,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        new WordSearch("puzzle.txt", "words.txt").run();
+        new WordSearch("puzzle-1000x1000.txt", "words3.txt").run();
     }
 
     public static void exitWithError(String errorMessage) {

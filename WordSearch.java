@@ -14,8 +14,8 @@ public class WordSearch {
     // Private Properties
     private String puzzleSource;
     private String wordSource;
-    private Graph graph;
-    private HashSet<String> dictionary;
+    private TreeGraph graph;
+    private PrefixTree dictionary;
 
     // Accessors
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
@@ -24,13 +24,13 @@ public class WordSearch {
     public void setWordSource(String wSource) { wordSource = wSource; }
     public String getWordSource() { return wordSource; }
 
-    public void setGraph(Graph g) { graph = g; }
-    public Graph getGraph() { return graph; }
+    public void setGraph(TreeGraph g) { graph = g; }
+    public TreeGraph getGraph() { return graph; }
 
-    public void setDictionary(HashSet<String> dict) { dictionary = dict; }
-    public HashSet<String> getDictionary() {
+    public void setDictionary(PrefixTree dict) { dictionary = dict; }
+    public PrefixTree getDictionary() {
         // Lazy instantiation
-        if(dictionary == null) dictionary = new HashSet<String>();
+        if(dictionary == null) dictionary = new PrefixTree();
         return dictionary;
     }
 
@@ -43,9 +43,15 @@ public class WordSearch {
     // Where the action happens.
     public void run() {
         initalizeSources();
-        graph.setDictionary(dictionary);
-        graph.forEachVertex((Integer row, Integer column) -> {
-            graph.depthFirstSearch(row, column);
+        graph.setTree(dictionary);
+
+        graph.forEachVertex((Integer row, Integer col) -> {
+            for(int i = -1; i < 2; i++) {
+                for(int j = -1; j < 2; j++) {
+                    if( i == 0 && j == 0) continue;
+                    graph.solve(row, col, i, j);
+                }
+            }
         });
     }
 
@@ -60,7 +66,7 @@ public class WordSearch {
                 // Get the size of the puzzle.
                 int size = new Integer(line);
                 // Initalize a new square graph.
-                setGraph(new Graph(size, size));
+                setGraph(new TreeGraph(size));
             } else {
                 // Split the string based on spaces.
                 String[] letters = line.split(" ");
@@ -72,13 +78,13 @@ public class WordSearch {
         });
 
         // Add in all the edges that we didn't do as we parsed in.
-        graph.populateEdges();
+        //graph.populateEdges();
 
         fileReader.setFilePath(getWordSource());
 
         // Read in the dictionary.
         fileReader.forEachLine((String line, Integer lineNumber) -> {
-            getDictionary().add(line);
+            getDictionary().insert(line);
         });
     }
 }
