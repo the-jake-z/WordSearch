@@ -1,14 +1,30 @@
+/*
+ * 		Project: 	Word Search (CS 360 Fall 2015, Project 3)
+ * 		File:		Graph.java
+ * 		Author:		Jacob A. Zarobsky
+ * 		Date:		Nov 5, 2015
+ *
+ * 		This file stores the graph in a 2D Array of Characters.
+ *      Using a stringbuilder and a PrefixTree, it searches
+ *      the puzzle for a list of words.
+ */
+
 import java.util.function.BiConsumer;
+import java.util.LinkedList;
 
 public class Graph {
+
+    // Properties
     private char[][] letters;
     private PrefixTree tree;
     private StringBuilder stringBuilder;
 
+    // Accessors
     public void setLetters(char[][] c) { letters = c; }
     public char[][] getLetters() { return letters; }
 
     public StringBuilder getStringBuilder() {
+        // Lazy instantiation
         if(stringBuilder == null) stringBuilder = new StringBuilder();
 
         return stringBuilder;
@@ -16,19 +32,23 @@ public class Graph {
 
     public void setStringBuilder(StringBuilder sb) { stringBuilder = sb; }
 
+    public void setTree(PrefixTree t) { tree = t; }
+    public PrefixTree getTree() { return tree; }
+
+    // Constructor
     public Graph(int size) {
         setLetters(new char[size][size]);
     }
 
-    public void setTree(PrefixTree t) { tree = t; }
-    public PrefixTree getTree() { return tree; }
-
+    // Convenience
     public void addVertex(int row, int col, char c) {
         letters[row][col] = c;
     }
 
+    // Convenience
     public int getSize() { return letters.length; }
 
+    // Convenience
     public void forEachVertex(BiConsumer<Integer, Integer> lambda) {
         for(int i = 0; i < getSize(); i++) {
             for(int j = 0; j < getSize(); j++ ) {
@@ -37,36 +57,55 @@ public class Graph {
         }
     }
 
-    public void solve(int row, int col, int dx, int dy) {
+    public void dfs(int row, int col, int dx, int dy) {
+        // Use the class's string builder.
         StringBuilder sb = getStringBuilder();
+        // Use the classes' letters.
         char[][] letters  = getLetters();
 
+        // Initalize a stack.
+        // This stack holds valid moves. It should potentially
+        // only hold 1 value at a time.
+        LinkedList<Node> stack = new LinkedList<Node>();
+
+        // Clear the string builder.
         sb.setLength(0);
 
-        int currentRow = row;
-        int currentCol = col;
+        // Do some initalization.
+        int currentRow = row, currentCol = col;
         char currentChar = letters[row][col];
 
-        Node cursor = tree.getRoot(currentChar);
+        // Get our root node we're going to use.
+        Node current = tree.getRoot(currentChar);
+        stack.push(current);
 
-        while(cursor != null) {
+        // While the stack is not empty (there is valid moves) and
+        // the current item is not null
+        while(!stack.isEmpty() && (current = stack.pop()) != null) {
+            // Append the current character to the string builder.
             sb.append(currentChar);
 
-            if(cursor.getEndOfWord() && sb.length() > 3) {
+            // We found a word! Yay!
+            if(current.getEndOfWord() && sb.length() > 3) {
                 System.out.printf(
                        "%s (%d,%d,%s)\n",
                        sb.toString(), col + 1, row + 1, direction(dx, dy));
             }
 
-            currentRow += dx;
-            currentCol += dy;
-
-            if(!(currentRow >= 0 && currentRow < getSize()
-                && currentCol >= 0 && currentCol < getSize())) break;
-
-            currentChar = letters[currentRow][currentCol];
-            cursor = tree.lookup(cursor, currentChar);
+            if(canMoveAgain(currentRow, currentCol, dx, dy)) {
+                // Increment these two
+                currentRow += dx; currentCol += dy;
+                // Update the current character.
+                currentChar = letters[currentRow][currentCol];
+                stack.push(tree.lookup(current, currentChar));
+            }
         }
+    }
+
+    private boolean canMoveAgain(int row, int col, int dx, int dy) {
+        row += dx;
+        col += dy;
+        return row >= 0 && row < getSize() && col >= 0 && col < getSize();
     }
 
     private String direction(int dx, int dy) {
