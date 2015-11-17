@@ -14,7 +14,7 @@ public class WordSearch {
     // Private Properties
     private String puzzleSource;
     private String wordSource;
-    private TreeGraph graph;
+    private Graph graph;
     private PrefixTree dictionary;
 
     // Accessors
@@ -24,8 +24,8 @@ public class WordSearch {
     public void setWordSource(String wSource) { wordSource = wSource; }
     public String getWordSource() { return wordSource; }
 
-    public void setGraph(TreeGraph g) { graph = g; }
-    public TreeGraph getGraph() { return graph; }
+    public void setGraph(Graph g) { graph = g; }
+    public Graph getGraph() { return graph; }
 
     public void setDictionary(PrefixTree dict) { dictionary = dict; }
     public PrefixTree getDictionary() {
@@ -66,7 +66,7 @@ public class WordSearch {
                 // Get the size of the puzzle.
                 int size = new Integer(line);
                 // Initalize a new square graph.
-                setGraph(new TreeGraph(size));
+                setGraph(new Graph(size));
             } else {
                 // Split the string based on spaces.
                 String[] letters = line.split(" ");
