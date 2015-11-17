@@ -36,9 +36,9 @@ public class PrefixTree {
             char c = s.charAt(i);
             // There's already a node with that character, make that our
             // current node.
-            if(current.getChildren().containsKey(c))
+            if(current.getChildren().containsKey(c)) {
                 current = current.getChildren().get(c);
-            else {
+            } else {
                 Node newNode = new Node(c); // Create a new node.
                 current.getChildren().put(c, newNode); // Add it to children.
                 current = newNode; // Set it to be our current.
