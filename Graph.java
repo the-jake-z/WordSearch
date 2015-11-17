@@ -58,9 +58,7 @@ public class Graph {
     }
 
     public void dfs(int row, int col, int dx, int dy) {
-        // Use the class's string builder.
         StringBuilder sb = getStringBuilder();
-        // Use the classes' letters.
         char[][] letters  = getLetters();
 
         // Initalize a stack.
@@ -87,9 +85,8 @@ public class Graph {
 
             // We found a word! Yay!
             if(current.getEndOfWord() && sb.length() > 3) {
-                System.out.printf(
-                       "%s (%d,%d,%s)\n",
-                       sb.toString(), col + 1, row + 1, direction(dx, dy));
+                System.out.printf("%s (%d,%d,%s)\n", sb.toString(),
+                        col + 1, row + 1, direction(dx, dy));
             }
 
             if(canMoveAgain(currentRow, currentCol, dx, dy)) {
@@ -102,12 +99,14 @@ public class Graph {
         }
     }
 
+    // Determines if you can move again given a row, column, and dx dy.
     private boolean canMoveAgain(int row, int col, int dx, int dy) {
         row += dx;
         col += dy;
         return row >= 0 && row < getSize() && col >= 0 && col < getSize();
     }
 
+    // Builds a directoin string based on the dx and dy values.
     private String direction(int dx, int dy) {
       StringBuilder direction = new StringBuilder();
 
