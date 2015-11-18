@@ -46,9 +46,14 @@ public class WordSearch {
         graph.setTree(getTree());
 
         graph.forEachVertex((Integer row, Integer col) -> {
+            // i = dx values. -1 -> left, 0 -> current, 1 -> right
+            // j = dy values. -1 -> up, 0 -> current, 1 -> down
             for(int i = -1; i < 2; i++) {
                 for(int j = -1; j < 2; j++) {
+                    // If we didn't move up, and didn't move down, then
+                    // skip this iteration.
                     if( i == 0 && j == 0) continue;
+                    // Depth first search in one direction.
                     graph.dfs(row, col, i, j);
                 }
             }
