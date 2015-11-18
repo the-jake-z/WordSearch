@@ -15,7 +15,7 @@ public class WordSearch {
     private String puzzleSource;
     private String wordSource;
     private Graph graph;
-    private PrefixTree dictionary;
+    private PrefixTree tree;
 
     // Accessors
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
@@ -27,11 +27,11 @@ public class WordSearch {
     public void setGraph(Graph g) { graph = g; }
     public Graph getGraph() { return graph; }
 
-    public void setDictionary(PrefixTree dict) { dictionary = dict; }
-    public PrefixTree getDictionary() {
+    public void setTree(PrefixTree t) { tree = t; }
+    public PrefixTree getTree() {
         // Lazy instantiation
-        if(dictionary == null) dictionary = new PrefixTree();
-        return dictionary;
+        if(tree == null) tree = new PrefixTree();
+        return tree;
     }
 
     // Constructor
@@ -43,7 +43,7 @@ public class WordSearch {
     // Where the action happens.
     public void run() {
         initalizeSources();
-        graph.setTree(dictionary);
+        graph.setTree(getTree());
 
         graph.forEachVertex((Integer row, Integer col) -> {
             for(int i = -1; i < 2; i++) {
@@ -84,7 +84,7 @@ public class WordSearch {
 
         // Read in the dictionary.
         fileReader.forEachLine((String line, Integer lineNumber) -> {
-            getDictionary().insert(line);
+            getTree().insert(line);
         });
     }
 }
