@@ -71,17 +71,16 @@ public class Graph {
 
         // Do some initalization.
         int currentRow = row, currentCol = col;
-        char currentChar = letters[row][col];
 
         // Get our root node we're going to use.
-        Node current = tree.getRoot(currentChar);
+        Node current = tree.getRoot(letters[row][col]);
         stack.push(current);
 
         // While the stack is not empty (there is valid moves) and
         // the current item is not null
         while(!stack.isEmpty() && (current = stack.pop()) != null) {
             // Append the current character to the string builder.
-            sb.append(currentChar);
+            sb.append(current.getLetter());
 
             // We found a word! Yay!
             if(current.getEndOfWord() && sb.length() > 3) {
@@ -93,8 +92,8 @@ public class Graph {
                 // Increment these two
                 currentRow += dx; currentCol += dy;
                 // Update the current character.
-                currentChar = letters[currentRow][currentCol];
-                stack.push(tree.lookup(current, currentChar));
+                stack.push(tree.lookup(current,
+                    letters[currentRow][currentCol]));
             }
         }
     }
