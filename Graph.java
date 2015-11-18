@@ -105,7 +105,7 @@ public class Graph {
         return row >= 0 && row < getSize() && col >= 0 && col < getSize();
     }
 
-    // Builds a directoin string based on the dx and dy values.
+    // Builds a direction string based on the dx and dy values.
     private String direction(int dx, int dy) {
       StringBuilder direction = new StringBuilder();
 
