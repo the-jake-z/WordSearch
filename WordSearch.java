@@ -82,9 +82,6 @@ public class WordSearch {
             }
         });
 
-        // Add in all the edges that we didn't do as we parsed in.
-        //graph.populateEdges();
-
         fileReader.setFilePath(getWordSource());
 
         // Read in the dictionary.
