@@ -8,14 +8,12 @@
  *      necessary data for the search.
  */
 
-import java.util.HashSet;
-
 public class WordSearch {
     // Private Properties
     private String puzzleSource;
     private String wordSource;
-    private CharGraph charGraph;
-    private HashSet<String> dictionary;
+    private Graph graph;
+    private PrefixTree tree;
 
     // Accessors
     public void setPuzzleSource(String pSource) { puzzleSource = pSource; }
@@ -27,11 +25,11 @@ public class WordSearch {
     public void setCharGraph(CharGraph c) {charGraph = c;}
     public CharGraph getCharGraph() { return charGraph; }
 
-    public void setDictionary(HashSet<String> dict) { dictionary = dict; }
-    public HashSet<String> getDictionary() {
+    public void setTree(PrefixTree t) { tree = t; }
+    public PrefixTree getTree() {
         // Lazy instantiation
-        if(dictionary == null) dictionary = new HashSet<String>();
-        return dictionary;
+        if(tree == null) tree = new PrefixTree();
+        return tree;
     }
 
     // Constructor
@@ -44,15 +42,18 @@ public class WordSearch {
     public void run() {
         initalizeSources();
 
-        charGraph.setDictionary(getDictionary());
+        graph.setTree(getTree());
 
-        int size = getCharGraph().getCharacters().length;
-
-        charGraph.forEachIndex((Integer row, Integer column) -> {
+        graph.forEachVertex((Integer row, Integer col) -> {
+            // i = dx values. -1 -> left, 0 -> current, 1 -> right
+            // j = dy values. -1 -> up, 0 -> current, 1 -> down
             for(int i = -1; i < 2; i++) {
                 for(int j = -1; j < 2; j++) {
+                    // If we didn't move up, and didn't move down, then
+                    // skip this iteration.
                     if( i == 0 && j == 0) continue;
-                    getCharGraph().depthFirstSearch(row, column, i, j);
+                    // Depth first search in one direction.
+                    graph.dfs(row, col, i, j);
                 }
             }
         });
@@ -69,7 +70,7 @@ public class WordSearch {
                 // Get the size of the puzzle.
                 int size = new Integer(line);
                 // Initalize a new square graph.
-                setCharGraph(new CharGraph(size));
+                setGraph(new Graph(size));
             } else {
                 // Split the string based on spaces.
                 String[] letters = line.split(" ");
@@ -85,7 +86,7 @@ public class WordSearch {
 
         // Read in the dictionary.
         fileReader.forEachLine((String line, Integer lineNumber) -> {
-            getDictionary().add(line);
+            getTree().insert(line);
         });
     }
 }
