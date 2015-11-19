@@ -22,8 +22,8 @@ public class WordSearch {
     public void setWordSource(String wSource) { wordSource = wSource; }
     public String getWordSource() { return wordSource; }
 
-    public void setCharGraph(CharGraph c) {charGraph = c;}
-    public CharGraph getCharGraph() { return charGraph; }
+    public void setGraph(Graph g) {graph = g;}
+    public Graph getGraph() { return graph; }
 
     public void setTree(PrefixTree t) { tree = t; }
     public PrefixTree getTree() {
@@ -77,7 +77,7 @@ public class WordSearch {
 
                 // Add a vertex for every letter in the line.
                 for(int i = 0; i < letters.length; i++)
-                    charGraph.setCharacter(lineNumber - 2, i,
+                    getGraph().addVertex(lineNumber - 2, i,
                         letters[i].charAt(0));
             }
         });
