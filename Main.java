@@ -17,7 +17,6 @@ public class Main {
     public static void exitWithError(String errorMessage) {
         // Print the error in red.
         System.err.println(errorMessage);
-
         // Return a number other than 0.
         System.exit(1);
     }

@@ -88,7 +88,7 @@ public class Graph {
                         col + 1, row + 1, direction(dx, dy));
             }
 
-            if(canMoveAgain(currentRow, currentCol, dx, dy)) {
+            if(canMoveAgain(currentRow + dx, currentCol + dy)) {
                 // Increment these two
                 currentRow += dx; currentCol += dy;
                 // Update the current character.
@@ -98,10 +98,8 @@ public class Graph {
         }
     }
 
-    // Determines if you can move again given a row, column, and dx dy.
-    private boolean canMoveAgain(int row, int col, int dx, int dy) {
-        row += dx;
-        col += dy;
+    // Determines if you can move again given a row and column
+    private boolean canMoveAgain(int row, int col) {
         return row >= 0 && row < getSize() && col >= 0 && col < getSize();
     }
 

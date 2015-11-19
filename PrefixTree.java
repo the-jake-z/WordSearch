@@ -20,8 +20,8 @@ public class PrefixTree {
         // Lazy Instantiaion
         if(roots == null) roots = new HashMap<Character, Node>();
 
-        if(!roots.containsKey(c))
-            roots.put(c, new Node(c));
+        // If the root is not in the list, create a new one and add it.
+        if(!roots.containsKey(c)) roots.put(c, new Node(c));
 
         return roots.get(c);
     }
@@ -31,22 +31,21 @@ public class PrefixTree {
         Node current = getRoot(s.charAt(0));
 
         // Iterate through the characters of the string, moving
-        // and inserting as we go along.
+        // and inserting as we go along. Start at 1 because root node
+        // is already assigned to current.
         for(int i = 1; i < s.length(); i++) {
             char c = s.charAt(i);
-            // There's already a node with that character, make that our
-            // current node.
-            if(current.getChildren().containsKey(c)) {
+
+            // Checks to see if there is a child node with that
+            // character. Otherwise it creates one and assigns it
+            // to the variable current.
+            if(current.getChildren().containsKey(c))
                 current = current.getChildren().get(c);
-            } else {
-                Node newNode = new Node(c); // Create a new node.
-                current.getChildren().put(c, newNode); // Add it to children.
-                current = newNode; // Set it to be our current.
-            }
+            else
+                current.getChildren().put(c, (current = new Node(c)));
 
             // If we're at the end of the word then set our flag that
-            // we're at the end (so we know when looking up that it is a
-            // valid word.)
+            // we're at the end. Allows for "subwords"
             if(i == (s.length() - 1)) current.setEndOfWord(true);
         }
     }

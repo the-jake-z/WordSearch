@@ -11,11 +11,8 @@ import java.util.HashMap;
 
 public class Node {
     // Properties
-    // Store our children in a hashmap Constant time access.
     private HashMap<Character, Node> children;
-    // Store our character.
     private char letter;
-    // Flag for end of the word.
     private boolean endOfWord;
 
     // Accessors
