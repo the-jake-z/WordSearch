@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project name="WordSearch" default="main">
+	<target name="clean" description="remove intermediate files">
+		<delete dir="classes"/>
+		<delete dir="release"/>
+	</target>
+	<target name="clobber" depends="clean" description="remove all artifact files">
+		<delete file="WordSearch.jar"/>
+	</target>
+	<target name="compile" description="compile the Java source code to class files">
+		<mkdir dir="classes"/>
+		<javac srcdir="src" destdir="classes" includeantruntime="false">
+			<classpath>
+				<path>
+					<pathelement location="bin/junit.jar" />
+					<pathelement location="bin/hamcrest-core.jar" />
+					<pathelement location="bin" />
+				</path>
+			</classpath>
+		</javac>
+	</target>
+	<target name="jar" depends="clean,compile" description="create a Jar file for the application">
+		<jar destfile="release/WordSearch.jar">
+			<fileset dir="classes" includes="**/*.class"/>
+			<manifest>
+				<attribute name="Main-Class" value="Main"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="doc" description="generate documentation">
+		<mkdir dir="doc"/>
+		<javadoc destdir="doc" noqualifier="all">
+			<fileset dir="src"/>
+			<classpath path="bin/junit.jar" />
+		</javadoc>
+	</target>
+	<target name="run" depends="jar" description="Start the ChocAn terminal">
+		<java jar="release/WordSearch.jar" fork="true"/>
+	</target>
+	<target name="test" depends="compile">
+		<junit haltonfailure="no">
+			<classpath>
+				<pathelement location="classes" />
+				<pathelement location="bin/junit.jar" />
+				<pathelement location="bin/hamcrest-core.jar" />
+			</classpath>
+			<batchtest fork="yes">
+				<fileset dir="src" includes="*Test.java" />
+			</batchtest>
+			<formatter type="brief" usefile="false" />
+		</junit>
+	</target>
+	<target name="all" depends="jar,doc,test" description="Builds a jar and the documentation"/>
+	<target name="main" depends="clean,compile,test" description="Builds entire project and runs tests"/>
+</project>
