@@ -69,7 +69,6 @@ public class Graph {
         // Clear the string builder.
         sb.setLength(0);
 
-        // Do some initalization.
         int currentRow = row, currentCol = col;
 
         // Get our root node we're going to use.
