@@ -10,8 +10,8 @@
  */
 
 public class Main {
-    public static void main(String[] args) {
-        new WordSearch("puzzle.txt", "words.txt").run();
+    public static void main(String[] args) {        
+        new WordSearch(args[0], args[1]).run();
     }
 
     public static void exitWithError(String errorMessage) {
