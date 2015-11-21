@@ -20,7 +20,7 @@
 		</javac>
 	</target>
 	<target name="jar" depends="clean,compile" description="create a Jar file for the application">
-		<jar destfile="release/WordSearch.jar">
+		<jar destfile="WordSearch.jar">
 			<fileset dir="classes" includes="**/*.class"/>
 			<manifest>
 				<attribute name="Main-Class" value="Main"/>
