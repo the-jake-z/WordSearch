@@ -1,8 +1,8 @@
 /*
-* 		Project: 	Word Search (CS 360 Fall 2015, Project 3)
-* 		File:		FileReader.java
-* 		Author:		Jacob A. Zarobsky
-* 		Date:		Nov 5, 2015
+ * 		Project: 	Word Search (CS 360 Fall 2015, Project 3)
+ * 		File:		FileReader.java
+ * 		Author:		Jacob A. Zarobsky
+ * 		Date:		Nov 5, 2015
  *
  *      This class implements a file reader
  *      that uses a lamda to deal with
