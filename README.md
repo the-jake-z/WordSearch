@@ -27,6 +27,9 @@ The dictionary must have the following format:
 
 1. Each line has an individual entry in the dictionary.
 
+Words must be at least 4 characters long. (It was in the project requirements), however this can
+be modified in the DFS in the Graph class.
+
 An example file is below:
 
 ```
