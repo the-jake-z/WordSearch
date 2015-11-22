@@ -83,12 +83,12 @@ public class FileReader {
             getBufferedReader().close();
         } catch (UnsupportedEncodingException ex) {
             Main.exitWithError(
-                "The encoding used was incompatible with the file.");
+                "The encoding used was incompatible with the file" + getFilePath() + ".");
         } catch (FileNotFoundException ex) {
-            Main.exitWithError("The file you entered was not found.");
+            Main.exitWithError("The file ("+ getFilePath() + ") was not found.");
         } catch (IOException ex) {
             Main.exitWithError(
-                "There was an IO error while attempting to read the file.");
+                "There was an IO error while attempting to read the file " + getFilePath() + ".");
         }
     }
 }
