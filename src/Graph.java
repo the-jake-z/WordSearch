@@ -82,7 +82,7 @@ public class Graph {
             sb.append(current.getLetter());
 
             // We found a word! Yay!
-            if(current.getEndOfWord() && sb.length() > 3) {
+            if(current.getEndOfWord()) {
                 System.out.printf("%s (%d,%d,%s)\n", sb.toString(),
                         col + 1, row + 1, direction(dx, dy));
             }
