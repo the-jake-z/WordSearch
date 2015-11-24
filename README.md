@@ -11,6 +11,7 @@ wikipedia:
 > (as they can be searched by prefixes), is an ordered tree data structure that
 > is used to store a dynamic set or associative array where the keys are usually
 > strings.
+
 --------------------------------------------------------------------------------
 
 You can run the program with square word search puzzle. Sample puzzles and dictionaries are
