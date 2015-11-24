@@ -499,7 +499,7 @@ cankeredness
 nonsedentarily
 chinch
 banquet
-udr
+
 savoyard
 demit
 kure
@@ -593,8 +593,6 @@ rocaille
 puddly
 liveryman
 inveterately
-dam
-ray
 parvise
 auden
 instrumental
@@ -810,13 +808,11 @@ escapable
 bithynia
 defining
 jotty
-clo
 sgabello
 bronxville
 gaon
 unscowling
 sophisticated
-guy
 unsevere
 nonmetal
 curia
@@ -998,7 +994,6 @@ saturday
 metathorax
 stumpiness
 baconian
-dmz
 sketchy
 rakee
 beltane
@@ -1146,7 +1141,6 @@ unsurpliced
 atropatene
 pauseless
 divers
-ver
 nonempiric
 nonconvertibleness
 marriage
@@ -1176,7 +1170,6 @@ undeluged
 flying
 succubous
 jacobethan
-lao
 sealed
 issacharite
 unconflictive
@@ -1205,7 +1198,7 @@ slaty
 hasher
 analogicalness
 guesswork
-lar
+
 laconic
 subduce
 cowfishes
@@ -1275,7 +1268,6 @@ benzotrifluoride
 unrepudiative
 mutular
 heighten
-qed
 lubrication
 composure
 phatic
@@ -1300,7 +1292,6 @@ caratinga
 preliquidate
 fedayee
 rgenology
-hem
 flogging
 kangaroo
 snippety
@@ -1359,7 +1350,6 @@ phosphoric
 roswell
 scalable
 fokker
-sir
 endoplasm
 lapful
 entomological
@@ -1520,7 +1510,6 @@ cinerator
 madhouse
 brow
 interactionist
-aim
 dcor
 unencysted
 overelaborated
@@ -1534,7 +1523,6 @@ reallegation
 deserving
 gifted
 royalizing
-var
 uproar
 anopisthograph
 oppenheim
@@ -1553,7 +1541,6 @@ impeccant
 scarfless
 nonelectrification
 pumpsie
-orc
 hurtless
 mildred
 gnarly
@@ -1592,7 +1579,6 @@ relitigating
 supplant
 destroyable
 antigravity
-rch
 gunboat
 subradular
 commonsensible
@@ -1650,7 +1636,6 @@ gynandry
 oversweetness
 specious
 stalino
-ila
 tritogeneia
 houdan
 registry
@@ -1714,7 +1699,6 @@ senior
 confessingly
 noneditorial
 pouch
-van
 prickleback
 penitential
 mongolic
@@ -1723,7 +1707,6 @@ canadianized
 fight
 annihilability
 handseled
-pod
 bevvy
 brightener
 radiotelephoned
@@ -1826,7 +1809,6 @@ pozzolanic
 ghanian
 antiscepticism
 dharana
-ani
 uncontradicted
 liddie
 harasser
@@ -1858,7 +1840,6 @@ redeemer
 condyle
 wreathless
 shogun
-syr
 sesquicarbonate
 housebreaking
 harangued
@@ -1928,7 +1909,6 @@ lassalle
 cokernut
 pasch
 greediest
-haw
 worship
 evaporimeter
 subcollegial
@@ -1998,3 +1978,23 @@ territorian
 leathery
 resin
 spinsterhood
+lambda
+calculus
+anderson
+carswell
+halpern
+roberts
+sazonov
+smith
+chakareski
+dixon
+borie
+morgan
+math
+zhang
+computer
+science
+university
+alabama
+crimson
+tide
