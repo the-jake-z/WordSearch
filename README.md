@@ -54,5 +54,5 @@ $ java -jar WordSearch.jar "path to puzzle" "path to dictionary" >> results.txt
 - Any version of the Java JDK (version 8.0+)
 - ANT
 
-# Contibuting
+# Contributing
 Please feel free to contact me if you're interested in contributing to this repository.
