@@ -42,5 +42,10 @@ To run the program, run `ant jar`, and then use the syntax
 $ java -jar WordSearch.jar <path to puzzle> <path to dictionary>
 ```
 
+# Requirements
+
+- Any version of the Java JDK (version 8.0+)
+- ANT
+
 # Contibuting
 Please feel free to contact me if you're interested in contributing to this repository.
