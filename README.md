@@ -3,8 +3,15 @@
 WordSearch was a simple project assigned for my Data Structures and Algorithms Class (CS 360)
 at the University of Alabama.
 
-The WordSearch implements a Trie to solve a word search given a dictionary. It has been
-tested and can run on a 1000x1000 puzzle.
+The WordSearch implements a Trie to solve a word search given a dictionary. From
+wikipedia:
+
+--------------------------------------------------------------------------------
+> ...a trie, also called digital tree and sometimes radix tree or prefix tree
+> (as they can be searched by prefixes), is an ordered tree data structure that
+> is used to store a dynamic set or associative array where the keys are usually
+> strings.
+--------------------------------------------------------------------------------
 
 You can run the program with square word search puzzle. Sample puzzles and dictionaries are
 provided in this repository.
