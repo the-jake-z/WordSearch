@@ -4,9 +4,10 @@ WordSearch was a simple project assigned for my Data Structures and Algorithms C
 at the University of Alabama.
 
 The WordSearch implements a Trie to solve a word search given a dictionary. From
-wikipedia:
+[Wikipedia](https://en.wikipedia.org/wiki/Trie):
 
 --------------------------------------------------------------------------------
+
 > ...a trie, also called digital tree and sometimes radix tree or prefix tree
 > (as they can be searched by prefixes), is an ordered tree data structure that
 > is used to store a dynamic set or associative array where the keys are usually
@@ -17,7 +18,7 @@ wikipedia:
 The program first reads in the puzzle, then the dictionary of words. As it reads
 in the dictionary of words, it builds a prefix tree. Each node represents a
 letter in a word. For example, if you had the words cat, cats, call, and carry
-you'd have a tree rooted at C that looks like this:
+you'd have a tree rooted at `c` that looks like this:
 
 ```
              c
@@ -36,7 +37,7 @@ you are dealing with.
 
 Each node also stores whether or not it is the end of the word in a boolean
 value. This allows for the dictionary to contain `cat` and `cats` and still be
-able to find the words.
+able to find the words, without having to store extra pointers to words.
 
 At each location in the puzzle, you do a depth first search in 1 direction,
 which gives you all the valid words. As you perform your DFS in the graph, the
