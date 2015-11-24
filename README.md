@@ -10,6 +10,7 @@ You can run the program with square word search puzzle. Sample puzzles and dicti
 provided in this repository.
 
 The puzzle must have the following format:
+
 1. Line 1 must have the dimension of the puzzle
 2. Characters must be on subsequent lines delimited by a space.
 
