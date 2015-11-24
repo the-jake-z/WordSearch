@@ -87,7 +87,9 @@ public class WordSearch {
         // Read in the word source and insert each word into the
         // prefix tree.
         fileReader.forEachLine((String line, Integer lineNumber) -> {
-            getTree().insert(line);
+            if(line.length() > 0) {
+                getTree().insert(line);
+            }
         });
     }
 }
