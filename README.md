@@ -39,7 +39,14 @@ character
 To run the program, run `ant jar`, and then use the syntax
 
 ```bash
-$ java -jar WordSearch.jar <path to puzzle> <path to dictionary>
+$ java -jar WordSearch.jar "path to puzzle" "path to dictionary"
+```
+
+The program outputs the text the console screen, which means you can use Standard IO Redirection to place the output in a file.
+For example, if you wanted the the output to go into the file `results.txt`, you could write
+
+```
+$ java -jar WordSearch.jar "path to puzzle" "path to dictionary" >> results.txt
 ```
 
 # Requirements
